@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import VehicleCard from "../components/VehicleCard";  // Ruta relativa al directorio components
+import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { fetchVehicles } from '../services/swapiService';  // Asegúrate de tener la función fetchVehicles implementada
+import VehicleCard from '../components/VehicleCard';  // Asegúrate de tener el componente VehicleCard correctamente implementado
 
 const VehiclesList = () => {
   const [vehicles, setVehicles] = useState([]);
 
   useEffect(() => {
-    fetch('https://swapi.dev/api/vehicles/')
-      .then((response) => response.json())
-      .then((data) => setVehicles(data.results))
-      .catch((error) => console.error('Error fetching vehicles:', error));
+    const fetchData = async () => {
+      const data = await fetchVehicles();
+      setVehicles(data);
+    };
+    fetchData();
   }, []);
 
   return (
     <Container>
-      <h2 className="my-4">Vehicles List</h2>
-      <Row>
-        {vehicles.map((vehicle, index) => (
-          <Col key={index}>
+      <h1 className="mt-4">Vehicles List</h1>
+      <Row className="mt-4">
+        {vehicles.map((vehicle) => (
+          <Col key={vehicle.url} xs={12} sm={6} md={4} lg={3}>
             <VehicleCard vehicle={vehicle} />
           </Col>
         ))}

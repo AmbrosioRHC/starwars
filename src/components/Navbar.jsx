@@ -1,33 +1,38 @@
-// Navbar.jsx
-
-import React, { useContext } from 'react';
+import React from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
-import { FavoritesContext } from '../context/FavoritesContext';
+import { NavLink } from 'react-router-dom';
 
-const NavBar = () => {
-  const { favorites } = useContext(FavoritesContext);
-
+const Header = () => {
   return (
-    <Navbar bg="dark" variant="dark">
+    <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand as={NavLink} to="/" exact>
           <img
             alt="Star Wars Logo"
-            src="https://w7.pngwing.com/pngs/723/1016/png-transparent-star-wars-logo-star-wars-text-logo-silhouette.png"  // Añade tu imagen de logo de Star Wars
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Star_Wars_Logo.svg/800px-Star_Wars_Logo.svg.png"
             width="30"
             height="30"
             className="d-inline-block align-top"
           />{' '}
           Star Wars App
         </Navbar.Brand>
-        <Nav className="ms-auto">
-          <Nav.Link href="#favorites">
-            Favorites <span className="badge bg-primary">{favorites.length}</span>
-          </Nav.Link>
-        </Nav>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ml-auto">
+            <Nav.Link as={NavLink} to="/" exact>
+              People
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/vehicles">
+              Vehicles
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/planets">
+              Planets
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );
 };
 
-export default NavBar;
+export default Header;

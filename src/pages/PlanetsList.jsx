@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import PlanetCard from "../components/PlanetCard";  // Ruta relativa al directorio components
+import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { fetchPlanets } from '../services/swapiService';  // Asegúrate de tener la función fetchPlanets implementada
+import PlanetCard from '../components/PlanetCard';  // Asegúrate de tener el componente PlanetCard correctamente implementado
 
 const PlanetsList = () => {
   const [planets, setPlanets] = useState([]);
 
   useEffect(() => {
-    fetch('https://swapi.dev/api/planets/')
-      .then((response) => response.json())
-      .then((data) => setPlanets(data.results))
-      .catch((error) => console.error('Error fetching planets:', error));
+    const fetchData = async () => {
+      const data = await fetchPlanets();
+      setPlanets(data);
+    };
+    fetchData();
   }, []);
 
   return (
     <Container>
-      <h2 className="my-4">Planets List</h2>
-      <Row>
-        {planets.map((planet, index) => (
-          <Col key={index}>
+      <h1 className="mt-4">Planets List</h1>
+      <Row className="mt-4">
+        {planets.map((planet) => (
+          <Col key={planet.url} xs={12} sm={6} md={4} lg={3}>
             <PlanetCard planet={planet} />
           </Col>
         ))}

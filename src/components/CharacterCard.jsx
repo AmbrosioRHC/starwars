@@ -1,29 +1,26 @@
-// CharacterCard.jsx
-
-import React, { useContext } from 'react';
+import React from 'react';
 import { Card, Button } from 'react-bootstrap';
-import { FavoritesContext } from '../context/FavoritesContext';
+import { Link } from 'react-router-dom';
 
 const CharacterCard = ({ character }) => {
-  const { addFavorite, isFavorite } = useContext(FavoritesContext);
-
-  const handleAddFavorite = () => {
-    addFavorite(character);
+  const getImageId = (url) => {
+    const id = url.split('/').filter(Boolean).pop();
+    return id;
   };
 
   return (
-    <Card style={{ width: '18rem', margin: '10px' }}>
+    <Card className="mb-3">
       <Card.Img variant="top" src={`https://starwars-visualguide.com/assets/img/characters/${getImageId(character.url)}.jpg`} />
       <Card.Body>
         <Card.Title>{character.name}</Card.Title>
         <Card.Text>
+          <strong>Birth Year:</strong> {character.birth_year}<br />
           <strong>Gender:</strong> {character.gender}<br />
-          <strong>Hair Color:</strong> {character.hair_color}<br />
-          <strong>Eye Color:</strong> {character.eye_color}
+          <strong>Height:</strong> {character.height} cm
         </Card.Text>
-        <Button variant="primary">View More</Button>{' '}
-        <Button variant="danger" onClick={handleAddFavorite}>
-          {isFavorite(character) ? 'Remove from Favorites' : 'Add to Favorites'}
+        <Link to={`/characters/${getImageId(character.url)}`} className="btn btn-primary">View Details</Link>
+        <Button variant="outline-danger" className="ml-2">
+          <i className="fa fa-heart"></i> Save
         </Button>
       </Card.Body>
     </Card>
@@ -31,7 +28,3 @@ const CharacterCard = ({ character }) => {
 };
 
 export default CharacterCard;
-
-function getImageId(url) {
-  return url.match(/\/(\d+)\/$/)[1];
-}

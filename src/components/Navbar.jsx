@@ -1,38 +1,44 @@
-import React from 'react';
-import { Navbar, Container, Nav } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Navbar, Nav, Badge } from 'react-bootstrap'; // Importa Badge para mostrar el contador
 import { NavLink } from 'react-router-dom';
 
-const Header = () => {
+const NavbarComponent = () => {
+  const [favoriteCount, setFavoriteCount] = useState(0); // Estado para contar favoritos
+
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
-      <Container>
-        <Navbar.Brand as={NavLink} to="/" exact>
-          <img
-            alt="Star Wars Logo"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Star_Wars_Logo.svg/800px-Star_Wars_Logo.svg.png"
-            width="30"
-            height="30"
-            className="d-inline-block align-top"
-          />{' '}
-          Star Wars App
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ml-auto">
-            <Nav.Link as={NavLink} to="/" exact>
-              People
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/vehicles">
-              Vehicles
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/planets">
-              Planets
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
+      <Navbar.Brand as={NavLink} to="/" exact>
+        <img
+          alt="Star Wars Logo"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRv8UEvq-8gIY_w1LvSUysHTGt-J_gAki08vg&s"
+          width="30"
+          height="30"
+          className="d-inline-block align-top"
+        />{' '}
+        Star Wars App
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="mr-auto">
+          <Nav.Link as={NavLink} to="/characters" exact>
+            People
+          </Nav.Link>
+          <Nav.Link as={NavLink} to="/vehicles" exact>
+            Vehicles
+          </Nav.Link>
+          <Nav.Link as={NavLink} to="/planets" exact>
+            Planets
+          </Nav.Link>
+        </Nav>
+        <Nav>
+          <Nav.Link as={NavLink} to="/favorites">
+            <i className="fa fa-heart"></i> Favorites{' '}
+            {favoriteCount > 0 && <Badge pill variant="danger">{favoriteCount}</Badge>}
+          </Nav.Link>
+        </Nav>
+      </Navbar.Collapse>
     </Navbar>
   );
 };
 
-export default Header;
+export default NavbarComponent;

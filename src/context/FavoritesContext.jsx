@@ -1,19 +1,15 @@
-// FavoritesContext.js
-
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useContext } from 'react';
 
 export const FavoritesContext = createContext();
 
 export const FavoritesProvider = ({ children }) => {
   const [favorites, setFavorites] = useState([]);
 
-  const addFavorite = (item) => {
-    if (!favorites.some((fav) => fav.url === item.url)) {
-      setFavorites([...favorites, item]);
-    }
+  const addToFavorites = (item) => {
+    setFavorites([...favorites, item]);
   };
 
-  const removeFavorite = (item) => {
+  const removeFromFavorites = (item) => {
     const updatedFavorites = favorites.filter((fav) => fav.url !== item.url);
     setFavorites(updatedFavorites);
   };
@@ -23,8 +19,14 @@ export const FavoritesProvider = ({ children }) => {
   };
 
   return (
-    <FavoritesContext.Provider value={{ favorites, addFavorite, removeFavorite, isFavorite }}>
+    <FavoritesContext.Provider
+      value={{ favorites, addToFavorites, removeFromFavorites, isFavorite }}
+    >
       {children}
     </FavoritesContext.Provider>
   );
+};
+
+export const useFavorites = () => {
+  return useContext(FavoritesContext);
 };

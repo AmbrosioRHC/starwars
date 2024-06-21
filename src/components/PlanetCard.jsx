@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const PlanetCard = ({ planet }) => {
   // Función para obtener el ID de la imagen basado en la URL del planeta
@@ -16,10 +17,9 @@ const PlanetCard = ({ planet }) => {
         <Card.Text>
           <strong>Climate:</strong> {planet.climate}<br />
           <strong>Terrain:</strong> {planet.terrain}<br />
-          <strong>Population:</strong> {planet.population}<br />
-          {/* Agregar más detalles según los datos de SWAPI */}
+          <strong>Population:</strong> {planet.population}
         </Card.Text>
-        <Button variant="primary">View Details</Button>
+        <Link to={`/planets/${getImageId(planet.url)}`} className="btn btn-primary">View Details</Link>
         {/* Add favorite button with heart icon */}
         <Button variant="outline-danger" className="ml-2">
           <i className="fa fa-heart"></i> Save

@@ -1,0 +1,54 @@
+/* src/styles.css */
+
+/* Estilos generales para el tema oscuro */
+body {
+    background-color: #121212;
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  /* Estilos para los enlaces */
+  a {
+    color: #1e90ff;
+  }
+  
+  a:hover {
+    color: #1e90ff;
+    text-decoration: none;
+  }
+  
+  /* Estilos para los botones */
+  .btn-primary {
+    background-color: #1e90ff;
+    border: none;
+  }
+  
+  .btn-primary:hover {
+    background-color: #1c7ed6;
+  }
+  
+  .btn-outline-danger {
+    color: #ff6b6b;
+    border-color: #ff6b6b;
+  }
+  
+  .btn-outline-danger:hover {
+    background-color: #ff6b6b;
+    color: #ffffff;
+    border-color: #ff6b6b;
+  }
+  
+  /* Estilos para las tarjetas */
+  .card {
+    background-color: #1f1f1f;
+    border: 1px solid #333;
+  }
+  
+  .card-title {
+    color: #1e90ff;
+  }
+  
+  .card-text {
+    color: #ffffff;
+  }
+  

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const VehicleCard = ({ vehicle }) => {
-  // Función para obtener el ID de la imagen basado en la URL del vehículo
   const getImageId = (url) => {
     const id = url.split('/').filter(Boolean).pop();
     return id;
@@ -16,11 +16,9 @@ const VehicleCard = ({ vehicle }) => {
         <Card.Text>
           <strong>Model:</strong> {vehicle.model}<br />
           <strong>Manufacturer:</strong> {vehicle.manufacturer}<br />
-          <strong>Cost in Credits:</strong> {vehicle.cost_in_credits}<br />
-          {/* Agregar más detalles según los datos de SWAPI */}
+          <strong>Class:</strong> {vehicle.vehicle_class}
         </Card.Text>
-        <Button variant="primary">View Details</Button>
-        {/* Add favorite button with heart icon */}
+        <Link to={`/vehicles/${getImageId(vehicle.url)}`} className="btn btn-primary">View Details</Link>
         <Button variant="outline-danger" className="ml-2">
           <i className="fa fa-heart"></i> Save
         </Button>
